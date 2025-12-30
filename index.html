@@ -1,87 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Welcome to the Internet</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Windows 95</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      background: #000080;
-      color: #00ff00;
-      font-family: "Courier New", monospace;
-      text-align: center;
-      padding: 20px;
-    }
+<style>
+  body {
+    margin: 0;
+    background: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 
-    .window {
-      background: #c0c0c0;
-      color: black;
-      max-width: 400px;
-      margin: auto;
-      border: 3px solid #000;
-      box-shadow: 8px 8px #000;
-    }
+  .boot-screen {
+    text-align: center;
+    width: 100%;
+  }
 
-    .title-bar {
-      background: #000080;
-      color: white;
-      padding: 5px;
-      font-weight: bold;
-    }
+  .logo {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
 
-    .content {
-      padding: 15px;
-    }
+  .progress-container {
+    width: 220px;
+    height: 14px;
+    border: 2px solid white;
+    margin: 0 auto;
+    overflow: hidden;
+  }
 
-    button {
-      font-family: "Courier New", monospace;
-      font-size: 16px;
-      padding: 10px 15px;
-      margin-top: 10px;
-      cursor: pointer;
-    }
+  .progress-bar {
+    width: 0%;
+    height: 100%;
+    background: white;
+    animation: load 4s linear forwards;
+  }
 
-    .loading {
-      margin-top: 10px;
-      font-size: 14px;
-      display: none;
-    }
-  </style>
+  @keyframes load {
+    from { width: 0%; }
+    to { width: 100%; }
+  }
+
+  .text {
+    margin-top: 15px;
+    font-size: 14px;
+  }
+
+  .connect-screen {
+    display: none;
+    background: #c0c0c0;
+    color: black;
+    padding: 20px;
+    border: 3px solid black;
+    box-shadow: 8px 8px black;
+    width: 320px;
+  }
+
+  button {
+    font-family: "Courier New", monospace;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 15px;
+    cursor: pointer;
+  }
+</style>
 </head>
 
 <body>
 
-  <div class="window">
-    <div class="title-bar">Internet Connection Wizard</div>
-    <div class="content">
-      <p>Establishing connection at 56.6 kbps...</p>
+<div class="boot-screen" id="boot">
+  <div class="logo">Microsoft<sup>®</sup><br>Windows 95</div>
 
-      <button onclick="startConnection()">CONNECT TO THE INTERNET</button>
-
-      <div class="loading" id="loading">
-        Dialing... █▒▒▒▒▒▒▒▒▒▒
-      </div>
-    </div>
+  <div class="progress-container">
+    <div class="progress-bar"></div>
   </div>
 
-  <audio id="dialup" src="dialup.mp3"></audio>
+  <div class="text">Starting Windows...</div>
+</div>
 
-  <script>
-    function startConnection() {
-      const audio = document.getElementById("dialup");
-      const loading = document.getElementById("loading");
+<div class="connect-screen" id="connect">
+  <b>Dial-Up Networking</b>
+  <p>Connecting to the Internet at 56.6 kbps...</p>
+  <button onclick="connect()">CONNECT</button>
+</div>
 
-      loading.style.display = "block";
-      audio.play();
+<audio id="dialup" src="dialup.mp3"></audio>
 
-      // Wi-Fi QR-style link
-      setTimeout(() => {
-        window.location.href =
-          "WIFI:T:WPA;S:EE-28MTQK;P:tkaHqHTQP3upCmCv;;";
-      }, 2500);
-    }
-  </script>
+<script>
+  setTimeout(() => {
+    document.getElementById("boot").style.display = "none";
+    document.getElementById("connect").style.display = "block";
+  }, 4200);
+
+  function connect() {
+    const audio = document.getElementById("dialup");
+    audio.play();
+
+    setTimeout(() => {
+      window.location.href =
+        "WIFI:T:WPA;S:EE-28MTQK;P:tkaHqHTQP3upCmCV;;";
+    }, 3000);
+  }
+</script>
 
 </body>
 </html>
