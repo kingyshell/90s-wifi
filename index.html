@@ -9,6 +9,7 @@
   body {
     margin: 0;
     background: black;
+    color: white;
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
@@ -16,14 +17,9 @@
     height: 100vh;
   }
 
-  .boot, .connect {
-    display: none;
+  .boot-screen {
     text-align: center;
-  }
-
-  .boot {
-    display: block;
-    color: white;
+    width: 100%;
   }
 
   .logo {
@@ -48,33 +44,30 @@
   }
 
   @keyframes load {
+    from { width: 0%; }
     to { width: 100%; }
   }
 
-  .window {
+  .text {
+    margin-top: 15px;
+    font-size: 14px;
+  }
+
+  .connect-screen {
+    display: none;
     background: #c0c0c0;
     color: black;
+    padding: 20px;
     border: 3px solid black;
     box-shadow: 8px 8px black;
     width: 320px;
   }
 
-  .title-bar {
-    background: #000080;
-    color: white;
-    padding: 5px;
-    font-weight: bold;
-    text-align: left;
-  }
-
-  .content {
-    padding: 15px;
-  }
-
   button {
     font-family: "Courier New", monospace;
-    padding: 8px 14px;
-    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 15px;
     cursor: pointer;
   }
 </style>
@@ -82,41 +75,37 @@
 
 <body>
 
-<!-- BOOT SCREEN -->
-<div class="boot" id="boot">
+<div class="boot-screen" id="boot">
   <div class="logo">Microsoft<sup>®</sup><br>Windows 95</div>
+
   <div class="progress-container">
     <div class="progress-bar"></div>
   </div>
-  <p>Starting Windows...</p>
+
+  <div class="text">Starting Windows...</div>
 </div>
 
-<!-- CONNECT WINDOW -->
-<div class="connect" id="connect">
-  <div class="window">
-    <div class="title-bar">AOL Dial-Up</div>
-    <div class="content">
-      <p>You’ve Got Mail!</p>
-      <button onclick="connect()">CONNECT</button>
-    </div>
-  </div>
+<div class="connect-screen" id="connect">
+  <b>Dial-Up Networking</b>
+  <p>Connecting to the Internet at 56.6 kbps...</p>
+  <button onclick="connect()">CONNECT</button>
 </div>
 
 <audio id="dialup" src="dialup.mp3"></audio>
-<audio id="mail" src="youve-got-mail.mp3"></audio>
 
 <script>
   setTimeout(() => {
     document.getElementById("boot").style.display = "none";
     document.getElementById("connect").style.display = "block";
-    document.getElementById("mail").play();
   }, 4200);
 
   function connect() {
-    document.getElementById("dialup").play();
+    const audio = document.getElementById("dialup");
+    audio.play();
+
     setTimeout(() => {
       window.location.href =
-        "WIFI:T:WPA;S:EE-28MTQK;P:tkaHqHTQP3upCmCv;;";
+        "WIFI:T:WPA;S:EE-28MTQK;P:tkaHqHTQP3upCmCV;;";
     }, 3000);
   }
 </script>
