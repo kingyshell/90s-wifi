@@ -16,7 +16,7 @@
     height: 100vh;
   }
 
-  .boot, .error, .connect {
+  .boot, .connect {
     display: none;
     text-align: center;
   }
@@ -91,18 +91,6 @@
   <p>Starting Windows...</p>
 </div>
 
-<!-- ERROR POPUP -->
-<div class="error" id="error">
-  <div class="window">
-    <div class="title-bar">System Error</div>
-    <div class="content">
-      <p>Connection failed.</p>
-      <p>Error 619: Port disconnected.</p>
-      <button onclick="showConnect()">OK</button>
-    </div>
-  </div>
-</div>
-
 <!-- CONNECT WINDOW -->
 <div class="connect" id="connect">
   <div class="window">
@@ -120,14 +108,9 @@
 <script>
   setTimeout(() => {
     document.getElementById("boot").style.display = "none";
-    document.getElementById("error").style.display = "block";
-  }, 4200);
-
-  function showConnect() {
-    document.getElementById("error").style.display = "none";
     document.getElementById("connect").style.display = "block";
     document.getElementById("mail").play();
-  }
+  }, 4200);
 
   function connect() {
     document.getElementById("dialup").play();
